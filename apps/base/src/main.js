@@ -1,8 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// 引入微服务
-import { registerMicroApps } from "qiankun";
+import { setupRoutes } from './router'
 
-registerMicroApps([])
+const setupAll = async () => {
+  const app = createApp(App)
 
-createApp(App).mount('#app')
+  setupRoutes(app)
+
+  app.mount('#app')
+}
