@@ -9,3 +9,5 @@ const setupAll = async () => {
 
   app.mount('#app')
 }
+
+setupAll()
