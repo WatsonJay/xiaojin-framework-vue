@@ -2,40 +2,21 @@
   <div class="login-container">
     <!-- 左侧插画区域 -->
     <div class="login-left">
-      <div class="logo-section">
-        <div class="logo">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="32" height="32" rx="8" fill="#409EFF"/>
-            <path d="M8 16L14 22L24 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="logo-text">Naive Admin Plus</span>
-        </div>
+      <div class="login-left-logo">
+        <img src="@/assets/Logo.png">
+        <span>Xiaojin Admin</span>
       </div>
-      
-      <div class="hero-section">
-        <h1 class="hero-title">开箱即用</h1>
-        <p class="hero-description">颜值与实用并存，中后台前端框架一站式解决方案</p>
+
+      <div class="login-left-title">
+        开箱即用
       </div>
-      
-      <div class="illustration">
-        <div class="illustration-content">
-          <div class="person">
-            <div class="person-head"></div>
-            <div class="person-body"></div>
-            <div class="person-arm"></div>
-          </div>
-          <div class="chart">
-            <div class="chart-bars">
-              <div class="bar bar-1"></div>
-              <div class="bar bar-2"></div>
-              <div class="bar bar-3"></div>
-            </div>
-          </div>
-          <div class="ok-badge">OK</div>
-          <div class="notification">
-            <div class="notification-dot"></div>
-          </div>
-        </div>
+
+      <div class="login-left-text">
+        颜值与实用并存，中后台前后端框架一站式解决方案
+      </div>
+
+      <div class="login-left-pic">
+        <img src="@/assets/Login/login_left.png" />
       </div>
     </div>
 
@@ -174,183 +155,68 @@ const handleLogin = async () => {
 
 <style lang="less" scoped>
 .login-container {
-  display: flex;
-  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0px, 1fr));
   background: #f5f5f5;
+  gap: 0 12px;
+  width: 100%;
+  height: 100%;
 }
 
 .login-left {
-  flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  grid-column: span 4 / span 4;
+  background: #E9EDF7;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 60px;
-  color: white;
+  justify-content: start;
+  padding: 20% 12px 12px;
   position: relative;
   overflow: hidden;
+  align-items: center;
 
-  .logo-section {
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 40px;
 
-      .logo-text {
-        font-size: 20px;
-        font-weight: 600;
-      }
-    }
-  }
-
-  .hero-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  &-logo {
+    color: #409EFF;
+    width: 100%;
+    font-size: 32px;
+    font-weight: 700;
     justify-content: center;
-    max-width: 400px;
-
-    .hero-title {
-      font-size: 48px;
-      font-weight: 700;
-      margin: 0 0 20px 0;
-      line-height: 1.2;
-    }
-
-    .hero-description {
-      font-size: 16px;
-      opacity: 0.9;
-      line-height: 1.6;
-      margin: 0;
+    display: flex;
+    align-items: center;
+    img {
+      height: 50px;
+      width: 50px;
+      margin-right: 10px;
     }
   }
 
-  .illustration {
-    position: absolute;
-    right: 60px;
-    bottom: 60px;
-    width: 300px;
-    height: 300px;
+  &-title {
+    font-size: 3rem;
+    color: #323d6f;
+    font-weight: 900;
+    margin: 20px 0;
+  }
 
-    .illustration-content {
-      position: relative;
-      width: 100%;
-      height: 100%;
+  &-text {
+    color: #323d6f;
+    font-size: 16px;
+    margin: 20px 0 30px;
+  }
 
-      .person {
-        position: absolute;
-        bottom: 50px;
-        left: 50px;
-
-        .person-head {
-          width: 60px;
-          height: 60px;
-          background: #2c3e50;
-          border-radius: 50%;
-          margin-bottom: 10px;
-        }
-
-        .person-body {
-          width: 80px;
-          height: 100px;
-          background: #3498db;
-          border-radius: 20px;
-          position: relative;
-        }
-
-        .person-arm {
-          position: absolute;
-          top: 20px;
-          right: -30px;
-          width: 50px;
-          height: 15px;
-          background: #3498db;
-          border-radius: 10px;
-          transform: rotate(-30deg);
-        }
-      }
-
-      .chart {
-        position: absolute;
-        top: 50px;
-        right: 80px;
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-
-        .chart-bars {
-          display: flex;
-          align-items: end;
-          gap: 8px;
-
-          .bar {
-            width: 12px;
-            border-radius: 6px;
-            
-            &.bar-1 {
-              height: 30px;
-              background: #e0e6ed;
-            }
-            
-            &.bar-2 {
-              height: 50px;
-              background: #e0e6ed;
-            }
-            
-            &.bar-3 {
-              height: 40px;
-              background: #2ecc71;
-            }
-          }
-        }
-      }
-
-      .ok-badge {
-        position: absolute;
-        bottom: 120px;
-        right: 50px;
-        background: #2ecc71;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .notification {
-        position: absolute;
-        bottom: 30px;
-        left: 30px;
-        width: 40px;
-        height: 40px;
-        background: #3498db;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .notification-dot {
-          width: 8px;
-          height: 8px;
-          background: #e74c3c;
-          border-radius: 50%;
-          position: absolute;
-          top: 5px;
-          right: 5px;
-        }
-      }
+  &-pic {
+    margin-top: 40px;
+    text-align: center;
+    img {
+      width: 75%;
     }
   }
 }
 
 .login-right {
-  flex: 1;
+  grid-column: span 8 / span 8;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
   padding: 60px;
 
   .form-container {
