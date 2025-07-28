@@ -475,40 +475,40 @@ const handleLogin = async () => {
 }
 
 /* 响应式设计 */
-@media (max-width: 1024px) {
-  .login-container {
-    flex-direction: column;
-  }
-  
-  .login-left {
-    min-height: 40vh;
-    padding: 40px;
-    
-    .illustration {
-      display: none;
-    }
-  }
-  
-  .login-right {
-    padding: 40px 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .login-left {
-    padding: 30px 20px;
-    
-    .hero-section .hero-title {
-      font-size: 36px;
-    }
-  }
-  
-  .login-right {
-    padding: 30px 20px;
-    
-    .form-container {
-      max-width: 100%;
-    }
-  }
-}
+//@media (max-width: 1024px) {
+//  .login-container {
+//    flex-direction: column;
+//  }
+//
+//  .login-left {
+//    min-height: 40vh;
+//    padding: 40px;
+//
+//    .illustration {
+//      display: none;
+//    }
+//  }
+//
+//  .login-right {
+//    padding: 40px 20px;
+//  }
+//}
+//
+//@media (max-width: 768px) {
+//  .login-left {
+//    padding: 30px 20px;
+//
+//    .hero-section .hero-title {
+//      font-size: 36px;
+//    }
+//  }
+//
+//  .login-right {
+//    padding: 30px 20px;
+//
+//    .form-container {
+//      max-width: 100%;
+//    }
+//  }
+//}
 </style> 

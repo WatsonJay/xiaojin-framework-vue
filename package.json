@@ -14,7 +14,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.12.4",
   "devDependencies": {
-    "turbo": "^2.5.4"
+    "turbo": "^2.5.4",
+    "less": "^4.4.0"
   },
   "dependencies": {
     "qiankun": "^2.10.16",
