@@ -22,15 +22,13 @@
 
     <!-- 右侧登录表单区域 -->
     <div class="login-right">
-      <div class="form-container">
+      <div class="shadow-xl login-right-form">
+        <div class="flex justify-center">
+          <el-avatar :size="80" :src="avatar"
+          />
+        </div>
+
         <div class="welcome-section">
-          <div class="avatar">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="24" fill="#409EFF"/>
-              <path d="M24 28C27.866 28 31 24.866 31 21C31 17.134 27.866 14 24 14C20.134 14 17 17.134 17 21C17 24.866 20.134 28 24 28Z" fill="white"/>
-              <path d="M24 30C18.477 30 14 34.477 14 40H34C34 34.477 29.523 30 24 30Z" fill="white"/>
-            </svg>
-          </div>
           <h2 class="welcome-title">欢迎来到 Naive Admin Plus! 👋</h2>
         </div>
 
@@ -118,6 +116,7 @@ import { ElMessage } from 'element-plus'
 
 const loginFormRef = ref()
 const loading = ref(false)
+const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
 
 const loginForm = reactive({
   username: 'admin',
@@ -215,9 +214,18 @@ const handleLogin = async () => {
 .login-right {
   grid-column: span 8 / span 8;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 60px;
+  align-items: center;
+  padding: 20px;
+
+  &-form {
+    width: 520px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px 80px;
+
+
+  }
 
   .form-container {
     width: 100%;
