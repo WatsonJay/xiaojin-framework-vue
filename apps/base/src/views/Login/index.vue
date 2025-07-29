@@ -28,9 +28,7 @@
           />
         </div>
 
-        <div class="welcome-section">
-          <h2 class="welcome-title">欢迎来到 Naive Admin Plus! 👋</h2>
-        </div>
+        <h2 class="welcome flex justify-center">欢迎来到 Xiaojin Admin! 👋</h2>
 
         <el-form
           ref="loginFormRef"
@@ -42,9 +40,9 @@
           <el-form-item prop="username">
             <el-input
               v-model="loginForm.username"
-              placeholder="admin"
-              prefix-icon="User"
+              placeholder=""
               class="form-input"
+              :prefix-icon="User"
             />
           </el-form-item>
 
@@ -52,10 +50,10 @@
             <el-input
               v-model="loginForm.password"
               type="password"
-              placeholder="••••••"
-              prefix-icon="Lock"
+              placeholder=""
               show-password
               class="form-input"
+              :prefix-icon="Key"
             />
           </el-form-item>
 
@@ -113,6 +111,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
+import { User, Key } from '@element-plus/icons-vue'
 
 const loginFormRef = ref()
 const loading = ref(false)
@@ -204,9 +203,9 @@ const handleLogin = async () => {
 
   &-pic {
     margin-top: 40px;
-    text-align: center;
     img {
       width: 75%;
+      margin: auto;
     }
   }
 }
@@ -224,7 +223,13 @@ const handleLogin = async () => {
     border-radius: 20px;
     padding: 40px 80px;
 
-
+    .welcome {
+      font-size: 22px;
+      font-weight: 500;
+      margin: 28px 0 20px 0;
+      transition: color .3s cubic-bezier(.4, 0, .2, 1);
+      color: #000000;
+    }
   }
 
   .form-container {
