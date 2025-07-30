@@ -4,7 +4,7 @@ import { setupRoutes } from './router'
 import { setupElementPlus } from './plugins/elementPlus'
 
 import "@/styles/index.less"
-import "@/styles/tailwind.css"
+import "@/styles/tailwindcss.css"
 
 const setupAll = async () => {
   const app = createApp(App)

@@ -57,52 +57,30 @@
             />
           </el-form-item>
 
-          <div class="form-options">
-            <span></span>
-            <el-link type="primary" :underline="false" class="forgot-link">
+          <div class="flex justify-end">
+            <el-button type="primary" link @click=""
+            >
               忘记密码
-            </el-link>
+            </el-button>
           </div>
 
-          <el-button
-            type="primary"
-            size="large"
-            class="login-button"
-            :loading="loading"
-            @click="handleLogin"
-          >
-            登录
-          </el-button>
+          <el-form-item class="mt-6!">
+            <el-button class="w-full" type="primary" size="large" round
+                       :loading="loading" @click="handleLogin"
+            >
+              登录
+            </el-button>
+          </el-form-item>
         </el-form>
 
-        <div class="signup-section">
+        <div class="flex justify-center">
           <span class="signup-text">还没有账号？</span>
-          <el-link type="primary" :underline="false" class="signup-link">
+          <el-button type="primary" link @click=""
+          >
             创建账号
-          </el-link>
+          </el-button>
         </div>
-
-        <div class="divider">
-          <span class="divider-text">其他</span>
-        </div>
-
-        <div class="social-login">
-          <div class="social-item">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0Z" fill="#1877F2"/>
-            </svg>
-          </div>
-          <div class="social-item">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="10" fill="#333"/>
-            </svg>
-          </div>
-          <div class="social-item">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="10" fill="#1DA1F2"/>
-            </svg>
-          </div>
-        </div>
+        <!-- TODO:待实现三方登录 --->
       </div>
     </div>
   </div>
@@ -118,7 +96,7 @@ const loading = ref(false)
 const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
 
 const loginForm = reactive({
-  username: 'admin',
+  username: '',
   password: ''
 })
 
@@ -229,126 +207,6 @@ const handleLogin = async () => {
       margin: 28px 0 20px 0;
       transition: color .3s cubic-bezier(.4, 0, .2, 1);
       color: #000000;
-    }
-  }
-
-  .form-container {
-    width: 100%;
-    max-width: 400px;
-
-    .welcome-section {
-      text-align: center;
-      margin-bottom: 40px;
-
-      .avatar {
-        margin-bottom: 20px;
-      }
-
-      .welcome-title {
-        font-size: 24px;
-        font-weight: 600;
-        color: #303133;
-        margin: 0;
-      }
-    }
-
-    .login-form {
-      .form-input {
-        height: 50px;
-        margin-bottom: 20px;
-
-        :deep(.el-input__inner) {
-          height: 50px;
-          line-height: 50px;
-          border-radius: 8px;
-          border: 1px solid #dcdfe6;
-          
-          &:focus {
-            border-color: #409eff;
-          }
-        }
-      }
-
-      .form-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-
-        .forgot-link {
-          font-size: 14px;
-        }
-      }
-
-      .login-button {
-        width: 100%;
-        height: 50px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 30px;
-      }
-    }
-
-    .signup-section {
-      text-align: center;
-      margin-bottom: 30px;
-
-      .signup-text {
-        color: #909399;
-        font-size: 14px;
-        margin-right: 5px;
-      }
-
-      .signup-link {
-        font-size: 14px;
-      }
-    }
-
-    .divider {
-      text-align: center;
-      margin: 30px 0;
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: #dcdfe6;
-      }
-
-      .divider-text {
-        background: white;
-        padding: 0 20px;
-        color: #909399;
-        font-size: 14px;
-        position: relative;
-      }
-    }
-
-    .social-login {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-
-      .social-item {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-      }
     }
   }
 }
