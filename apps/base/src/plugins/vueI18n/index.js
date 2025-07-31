@@ -8,14 +8,15 @@ import { createI18n } from 'vue-i18n'
 import { useLocaleStoreWithOut } from '@/stores/modules/locale'
 import { setHtmlPageLang } from './helper'
 
+import zhcn from '@/locales/zh-CN.js'
+import en from '@/locales/en.js'
+
 export let i18n
 
 const createI18nOptions = async () => {
   const localeStore = useLocaleStoreWithOut()
   const locale = localeStore.getCurrentLocale
   const localeMap = localeStore.getLocaleMap
-  const defaultLocal = await import(`../../locales/${locale.lang}.ts`)
-  const message = defaultLocal.default ?? {}
 
   setHtmlPageLang(locale.lang)
 
@@ -29,7 +30,8 @@ const createI18nOptions = async () => {
     locale: locale.lang,
     fallbackLocale: locale.lang,
     messages: {
-      [locale.lang]: message
+      'zh-CN':zhcn,
+      'en':en,
     },
     availableLocales: localeMap.map((v) => v.lang),
     sync: true,

@@ -8,11 +8,11 @@
       </div>
 
       <div class="login-left-title">
-        开箱即用
+        {{ $t('login.title') }}
       </div>
 
       <div class="login-left-text">
-        颜值与实用并存，中后台前后端框架一站式解决方案
+        {{ $t('login.text') }}
       </div>
 
       <div class="login-left-pic">
@@ -28,7 +28,7 @@
           />
         </div>
 
-        <h2 class="welcome flex justify-center">欢迎来到 Xiaojin Admin! 👋</h2>
+        <h2 class="welcome flex justify-center">{{ $t('login.welcome') }}</h2>
 
         <el-form
           ref="loginFormRef"
@@ -82,31 +82,51 @@
         </div>
         <!-- TODO:待实现三方登录 --->
       </div>
+      <div class="change-language">
+        <el-select v-model="$i18n.locale" placeholder="Select" style="width: 100px" @change="changeLanguage">
+          <el-option v-for="item in localeStore.getLocaleMap" :label="item.name" :value="item.lang"/>
+        </el-select>
+      </div>
     </div>
+
+
   </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import {ref, reactive, computed} from 'vue'
 import { ElMessage } from 'element-plus'
 import { User, Key } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
+import { useLocaleStoreWithOut} from '@/stores/modules/locale.js'
 
+const { t, locale } = useI18n({ useScope: 'global' })
 const loginFormRef = ref()
 const loading = ref(false)
 const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
+const currLanguage = ref('')
+const localeStore = useLocaleStoreWithOut()
+
+currLanguage.value = localeStore.currentLocale.lang
 
 const loginForm = reactive({
   username: '',
   password: ''
 })
 
+//校验提示词i8n
+const userReMsg = computed(() => t('validate.required', {item: t('common.username')}))
+const passReMsg = computed(() => t('validate.required', {item: t('common.password')}))
+const passLeMsg = computed(() => t('validate.min', {item: t('common.password'), min: 6}))
+
+
 const loginRules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' }
+    { required: true, message: userReMsg, trigger: 'blur' }
   ],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, message: '密码长度不能少于6位', trigger: 'blur' }
+    { required: true, message: passReMsg, trigger: 'blur' },
+    { min: 6, message: , trigger: 'blur' }
   ]
 }
 
@@ -127,6 +147,12 @@ const handleLogin = async () => {
     console.log('验证失败:', error)
   }
 }
+
+//切换语言
+const changeLanguage = () => {
+  localeStore.setCurrentLocale({'lang': currLanguage.value})
+}
+
 </script>
 
 <style lang="less" scoped>
@@ -137,79 +163,86 @@ const handleLogin = async () => {
   gap: 0 12px;
   width: 100%;
   height: 100%;
-}
 
-.login-left {
-  grid-column: span 4 / span 4;
-  background: #E9EDF7;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  padding: 20% 12px 12px;
-  position: relative;
-  overflow: hidden;
-  align-items: center;
-
-
-  &-logo {
-    color: #409EFF;
-    width: 100%;
-    font-size: 32px;
-    font-weight: 700;
-    justify-content: center;
+  .login-left {
+    grid-column: span 4 / span 4;
+    background: #E9EDF7;
     display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20% 12px 12px;
+    position: relative;
+    overflow: hidden;
     align-items: center;
-    img {
-      height: 50px;
-      width: 50px;
-      margin-right: 10px;
+
+
+    &-logo {
+      color: #409EFF;
+      width: 100%;
+      font-size: 32px;
+      font-weight: 700;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      img {
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+      }
+    }
+
+    &-title {
+      font-size: 3rem;
+      color: #323d6f;
+      font-weight: 900;
+      margin: 20px 0;
+    }
+
+    &-text {
+      color: #323d6f;
+      font-size: 16px;
+      margin: 20px 0 30px;
+    }
+
+    &-pic {
+      margin-top: 40px;
+      img {
+        width: 75%;
+        margin: auto;
+      }
     }
   }
 
-  &-title {
-    font-size: 3rem;
-    color: #323d6f;
-    font-weight: 900;
-    margin: 20px 0;
-  }
+  .login-right {
+    grid-column: span 8 / span 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 
-  &-text {
-    color: #323d6f;
-    font-size: 16px;
-    margin: 20px 0 30px;
-  }
+    &-form {
+      width: 520px;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 40px 80px;
 
-  &-pic {
-    margin-top: 40px;
-    img {
-      width: 75%;
-      margin: auto;
+      .welcome {
+        font-size: 22px;
+        font-weight: 500;
+        margin: 28px 0 20px 0;
+        transition: color .3s cubic-bezier(.4, 0, .2, 1);
+        color: #000000;
+      }
     }
+  }
+
+  .change-language {
+    position: fixed;
+    top: 20px;
+    right: 30px;
   }
 }
 
-.login-right {
-  grid-column: span 8 / span 8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-
-  &-form {
-    width: 520px;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 40px 80px;
-
-    .welcome {
-      font-size: 22px;
-      font-weight: 500;
-      margin: 28px 0 20px 0;
-      transition: color .3s cubic-bezier(.4, 0, .2, 1);
-      color: #000000;
-    }
-  }
-}
 
 /* 响应式设计 */
 //@media (max-width: 1024px) {
