@@ -40,7 +40,7 @@
           <el-form-item prop="username">
             <el-input
               v-model="loginForm.username"
-              placeholder=""
+              :placeholder="$t( 'common.username' )"
               class="form-input"
               :prefix-icon="User"
             />
@@ -50,7 +50,7 @@
             <el-input
               v-model="loginForm.password"
               type="password"
-              placeholder=""
+              :placeholder="$t( 'common.password' )"
               show-password
               class="form-input"
               :prefix-icon="Key"
@@ -104,10 +104,7 @@ const { t, locale } = useI18n({ useScope: 'global' })
 const loginFormRef = ref()
 const loading = ref(false)
 const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
-const currLanguage = ref('')
 const localeStore = useLocaleStoreWithOut()
-
-currLanguage.value = localeStore.currentLocale.lang
 
 const loginForm = reactive({
   username: '',
@@ -126,7 +123,7 @@ const loginRules = {
   ],
   password: [
     { required: true, message: passReMsg, trigger: 'blur' },
-    { min: 6, message: , trigger: 'blur' }
+    { min: 6, message: passLeMsg, trigger: 'blur' }
   ]
 }
 
@@ -149,8 +146,8 @@ const handleLogin = async () => {
 }
 
 //切换语言
-const changeLanguage = () => {
-  localeStore.setCurrentLocale({'lang': currLanguage.value})
+const changeLanguage = (value) => {
+  localeStore.setCurrentLocale({'lang': value})
 }
 
 </script>
