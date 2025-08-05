@@ -62,10 +62,65 @@
 </template>
 
 <script setup>
+import {ref, reactive, computed} from 'vue'
+import { User, Key } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
+import {ElMessage} from "element-plus";
+
+const loginFormRef = ref()
+const loading = ref(false)
+const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
+
+const { t } = useI18n({ useScope: 'global' })
+
+const loginForm = reactive({
+  username: '',
+  password: ''
+})
+
+//校验提示词i8n
+const userReMsg = computed(() => t('validate.required', {item: t('common.username')}))
+const passReMsg = computed(() => t('validate.required', {item: t('common.password')}))
+const passLeMsg = computed(() => t('validate.min', {item: t('common.password'), min: 6}))
+
+
+const loginRules = {
+  username: [
+    { required: true, message: userReMsg, trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: passReMsg, trigger: 'blur' },
+    { min: 6, message: passLeMsg, trigger: 'blur' }
+  ]
+}
+
+const handleLogin = async () => {
+  if (!loginFormRef.value) return
+
+  try {
+    const valid = await loginFormRef.value.validate()
+    if (valid) {
+      loading.value = true
+      // 模拟登录请求
+      setTimeout(() => {
+        loading.value = false
+        ElMessage.success('登录成功')
+      }, 1000)
+    }
+  } catch (error) {
+    console.log('验证失败:', error)
+  }
+}
 
 </script>
 
 
 <style lang="less" scoped>
-
+.welcome {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 28px 0 20px 0;
+  transition: color .3s cubic-bezier(.4, 0, .2, 1);
+  color: #000000;
+}
 </style>

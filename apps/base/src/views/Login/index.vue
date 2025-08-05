@@ -23,7 +23,8 @@
     <!-- 右侧登录表单区域 -->
     <div class="login-right">
       <div class="shadow-xl login-right-form">
-        <!--  -->
+        <!-- 动态切换 -->
+        <component :is="formComponent[currentForm]"></component>
       </div>
       <div class="change-language">
         <el-select v-model="$i18n.locale" placeholder="Select" style="width: 100px" @change="changeLanguage">
@@ -37,57 +38,15 @@
 </template>
 
 <script setup>
-import {ref, reactive, computed} from 'vue'
-import { ElMessage } from 'element-plus'
-import { User, Key } from '@element-plus/icons-vue'
-import { useI18n } from 'vue-i18n'
 import { useLocaleStoreWithOut} from '@/stores/modules/locale.js'
-
-const { t, locale } = useI18n({ useScope: 'global' })
-const loginFormRef = ref()
-const loading = ref(false)
-const avatar = ref(new URL('@/assets/Login/default_avatar.png', import.meta.url).href)
+import {reactive, ref} from "vue";
+import loginForm from "@/views/Login/components/LoginForm.vue";
 const localeStore = useLocaleStoreWithOut()
 
-const loginForm = reactive({
-  username: '',
-  password: ''
+const currentForm = ref("loginForm")
+const formComponent = reactive({
+  'loginForm': loginForm,
 })
-
-//校验提示词i8n
-const userReMsg = computed(() => t('validate.required', {item: t('common.username')}))
-const passReMsg = computed(() => t('validate.required', {item: t('common.password')}))
-const passLeMsg = computed(() => t('validate.min', {item: t('common.password'), min: 6}))
-
-
-const loginRules = {
-  username: [
-    { required: true, message: userReMsg, trigger: 'blur' }
-  ],
-  password: [
-    { required: true, message: passReMsg, trigger: 'blur' },
-    { min: 6, message: passLeMsg, trigger: 'blur' }
-  ]
-}
-
-const handleLogin = async () => {
-  if (!loginFormRef.value) return
-  
-  try {
-    const valid = await loginFormRef.value.validate()
-    if (valid) {
-      loading.value = true
-      // 模拟登录请求
-      setTimeout(() => {
-        loading.value = false
-        ElMessage.success('登录成功')
-      }, 1000)
-    }
-  } catch (error) {
-    console.log('验证失败:', error)
-  }
-}
-
 //切换语言
 const changeLanguage = (value) => {
   localeStore.setCurrentLocale({'lang': value})
@@ -165,14 +124,6 @@ const changeLanguage = (value) => {
       background-color: #fff;
       border-radius: 20px;
       padding: 40px 80px;
-
-      .welcome {
-        font-size: 22px;
-        font-weight: 500;
-        margin: 28px 0 20px 0;
-        transition: color .3s cubic-bezier(.4, 0, .2, 1);
-        color: #000000;
-      }
     }
   }
 
